@@ -5,6 +5,7 @@ import android.bluetooth.BluetoothAdapter
 import android.bluetooth.BluetoothDevice
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -16,7 +17,15 @@ import com.conecttobluetooth.databinding.FragmentFirstBinding
 /**
  * A simple [Fragment] subclass as the default destination in the navigation.
  */
-class FirstFragment : Fragment() {
+class FirstFragment : Fragment(),iSendText {
+    override fun setText(text:String){
+        try {
+            binding.textviewFirst.text = text.toString()
+        }catch (e:Exception){
+            Log.i(null,"  binding.textviewFirst.text  error")
+        }
+    }
+
 
     private var _binding: FragmentFirstBinding? = null
 
@@ -28,6 +37,7 @@ class FirstFragment : Fragment() {
     var mybluetooth:BluetoorhConnection= BluetoorhConnection()
 
     var pairedDevices: Set<BluetoothDevice>? = null
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -42,6 +52,10 @@ class FirstFragment : Fragment() {
     @SuppressLint("MissingPermission")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        mybluetooth.setinterfaceSendText(this)
+
+
 
         binding.buttonFirst.setOnClickListener {
             findNavController().navigate(R.id.action_FirstFragment_to_SecondFragment)
@@ -62,6 +76,26 @@ class FirstFragment : Fragment() {
                     }
                 }
             }
+            mybluetooth.clientConnect()
+            binding.buttonStep2.visibility= View.INVISIBLE
+        }
+
+        binding.buttonConnectClose.setOnClickListener {
+            mybluetooth.clientClose()
+            binding.buttonStep2.visibility= View.VISIBLE
+        }
+        binding.buttonSend0.setOnClickListener {
+           // mybluetooth.writeBluetooth(0)
+            val byteArray = byteArrayOf(0.toByte())
+         //   val byteArray = byteArrayOf(0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0)
+            mybluetooth.writeBluetooth(byteArray)
+
+        }
+        binding.buttonSend1.setOnClickListener {
+           // mybluetooth.writeBluetooth(1)
+            val byteArray = byteArrayOf(1.toByte())
+           // val byteArray = byteArrayOf(1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1)
+            mybluetooth.writeBluetooth(byteArray)
         }
     }
     @SuppressLint("MissingPermission")

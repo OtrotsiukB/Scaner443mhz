@@ -44,4 +44,38 @@
         android:text="Button"
         app:layout_constraintStart_toStartOf="@+id/buttonStart1"
         app:layout_constraintTop_toBottomOf="@+id/buttonStart1" />
+
+    <Button
+        android:id="@+id/buttonConnect"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="50dp"
+        android:text="3 connect"
+        android:visibility="invisible"
+        app:layout_constraintStart_toEndOf="@+id/buttonStep2"
+        app:layout_constraintTop_toBottomOf="@+id/buttonStart1" />
+
+    <Button
+        android:id="@+id/buttonSend0"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="0"
+        app:layout_constraintEnd_toStartOf="@+id/button_first"
+        app:layout_constraintTop_toBottomOf="@+id/button_first" />
+
+    <Button
+        android:id="@+id/buttonSend1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="1"
+        app:layout_constraintStart_toEndOf="@+id/button_first"
+        app:layout_constraintTop_toBottomOf="@+id/button_first" />
+
+    <Button
+        android:id="@+id/buttonConnectClose"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="ConnectClose"
+        app:layout_constraintBottom_toBottomOf="parent"
+        tools:layout_editor_absoluteX="158dp" />
 </androidx.constraintlayout.widget.ConstraintLayout>
