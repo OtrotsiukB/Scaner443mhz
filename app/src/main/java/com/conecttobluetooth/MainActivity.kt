@@ -22,7 +22,7 @@ import androidx.core.content.ContextCompat
 
 
 class MainActivity : AppCompatActivity() {
-
+//scaner
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var binding: ActivityMainBinding
 

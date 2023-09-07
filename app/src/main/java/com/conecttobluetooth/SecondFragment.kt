@@ -14,10 +14,20 @@ import com.conecttobluetooth.databinding.FragmentSecondBinding
 class SecondFragment : Fragment() {
 
     private var _binding: FragmentSecondBinding? = null
+    lateinit var signal:SignalData
 
     // This property is only valid between onCreateView and
     // onDestroyView.
     private val binding get() = _binding!!
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        arguments?.let {
+
+            signal = it.getParcelable("Signal")!!
+
+        }
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -35,6 +45,12 @@ class SecondFragment : Fragment() {
         binding.buttonSecond.setOnClickListener {
             findNavController().navigate(R.id.action_SecondFragment_to_FirstFragment)
         }
+        binding.tvName.text = signal.name.toString()
+        var temp = ""
+        for (i in signal.signal){
+            temp += i.toString() + " "
+        }
+        binding.tvSignal.text = temp
     }
 
     override fun onDestroyView() {

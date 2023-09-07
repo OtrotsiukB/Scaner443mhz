@@ -9,21 +9,29 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.conecttobluetooth.databinding.FragmentFirstBinding
+import com.conecttobluetooth.rv.rvListSignal
 
 
 /**
  * A simple [Fragment] subclass as the default destination in the navigation.
  */
-class FirstFragment : Fragment(),iSendText {
+class FirstFragment : Fragment(),iSendText,rvListSignal.OnItemClickListener,iSendListInRv {
+
     override fun setText(text:String){
+
         try {
             binding.textviewFirst.text = text.toString()
+
         }catch (e:Exception){
             Log.i(null,"  binding.textviewFirst.text  error")
         }
+        present.setText(text)
     }
 
 
@@ -37,6 +45,9 @@ class FirstFragment : Fragment(),iSendText {
     var mybluetooth:BluetoorhConnection= BluetoorhConnection()
 
     var pairedDevices: Set<BluetoothDevice>? = null
+    private val signalAdapter: rvListSignal = rvListSignal(this)
+
+    val present = PresenterFirstFragmet()
 
 
     override fun onCreateView(
@@ -54,16 +65,23 @@ class FirstFragment : Fragment(),iSendText {
         super.onViewCreated(view, savedInstanceState)
 
         mybluetooth.setinterfaceSendText(this)
+        present.interfaceSendListInRv=this
 
+      /*  binding.rvMainCategory.layoutManager = mLayoutManager
+        categorryAdapter.setData(dataCategoryMain.getCategory())
+        binding.rvMainCategory.adapter=categorryAdapter*/
+        val mLayoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL,true)
+        binding.rvListSignal.layoutManager = mLayoutManager
 
+        binding.rvListSignal.adapter=signalAdapter
 
         binding.buttonFirst.setOnClickListener {
             findNavController().navigate(R.id.action_FirstFragment_to_SecondFragment)
         }
-        binding.buttonStart1.setOnClickListener{
+        /*binding.buttonStart1.setOnClickListener{
            //startTest()
             binding.textviewFirst.text=mybluetooth.startTest()
-        }
+        }*/
         binding.buttonStep2.setOnClickListener {
             //step2()
            pairedDevices = mybluetooth.getBluetoothDeice()
@@ -89,6 +107,8 @@ class FirstFragment : Fragment(),iSendText {
             val byteArray = byteArrayOf(0.toByte())
          //   val byteArray = byteArrayOf(0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0)
             mybluetooth.writeBluetooth(byteArray)
+
+            present.getListSignalData()?.let { it1 -> signalAdapter.setData(it1) }
 
         }
         binding.buttonSend1.setOnClickListener {
@@ -154,5 +174,19 @@ class FirstFragment : Fragment(),iSendText {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    override fun onItemClick(data: SignalData) {
+        var bundle = bundleOf("Signal" to data)
+        findNavController().navigate(R.id.action_FirstFragment_to_SecondFragment,bundle)
+    }
+
+    override fun sendListinRv() {
+        val temp = present.getListSignalData()
+        if (temp != null) {
+            signalAdapter.setData(temp)
+            binding.rvListSignal.adapter=signalAdapter
+        }
+       // present.getListSignalData()?.let { signalAdapter.setData(it) }
     }
 }
