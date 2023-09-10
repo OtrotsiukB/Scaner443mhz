@@ -14,6 +14,7 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.conecttobluetooth.data.SignalData
 import com.conecttobluetooth.databinding.FragmentFirstBinding
 import com.conecttobluetooth.rv.rvListSignal
 
@@ -47,7 +48,7 @@ class FirstFragment : Fragment(),iSendText,rvListSignal.OnItemClickListener,iSen
     var pairedDevices: Set<BluetoothDevice>? = null
     private val signalAdapter: rvListSignal = rvListSignal(this)
 
-    val present = PresenterFirstFragmet()
+    val present = PresenterFirstFragment()
 
 
     override fun onCreateView(

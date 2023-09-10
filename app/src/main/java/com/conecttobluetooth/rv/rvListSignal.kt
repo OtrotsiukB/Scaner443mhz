@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.conecttobluetooth.R
-import com.conecttobluetooth.SignalData
+import com.conecttobluetooth.data.SignalData
 
 class rvListSignal(private val listener: OnItemClickListener): RecyclerView.Adapter<rvListSignal.EmptyViewHolder>() {
 

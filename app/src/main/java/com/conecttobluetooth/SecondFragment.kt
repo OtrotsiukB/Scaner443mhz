@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
+import com.conecttobluetooth.data.SignalData
 import com.conecttobluetooth.databinding.FragmentSecondBinding
 
 /**
@@ -14,7 +15,7 @@ import com.conecttobluetooth.databinding.FragmentSecondBinding
 class SecondFragment : Fragment() {
 
     private var _binding: FragmentSecondBinding? = null
-    lateinit var signal:SignalData
+    lateinit var signal: SignalData
 
     // This property is only valid between onCreateView and
     // onDestroyView.

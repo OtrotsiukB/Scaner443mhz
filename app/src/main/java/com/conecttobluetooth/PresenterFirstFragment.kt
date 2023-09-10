@@ -1,9 +1,9 @@
 package com.conecttobluetooth
 
-import android.util.Log
+import com.conecttobluetooth.data.SignalData
 import java.time.LocalDateTime
 
-class PresenterFirstFragmet {
+class PresenterFirstFragment {
 
    private var listSignalData: MutableList<SignalData>? = mutableListOf<SignalData>()
 
@@ -18,14 +18,14 @@ class PresenterFirstFragmet {
            return listSignalData
        }
    }
-   fun getListSignalData(count:Int):SignalData{
+   fun getListSignalData(count:Int): SignalData {
        if (listSignalData!=null && listSignalData!!.count() >= count){
           return listSignalData?.get(count) ?: SignalData("NONE", mutableListOf())
        }else{
            return SignalData("NONE", mutableListOf())
        }
     }
-   fun addListSignalData( signal:SignalData){
+   fun addListSignalData( signal: SignalData){
         listSignalData?.add(signal)
     }
 
