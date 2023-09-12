@@ -17,6 +17,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.conecttobluetooth.data.SignalData
 import com.conecttobluetooth.databinding.FragmentFirstBinding
 import com.conecttobluetooth.rv.rvListSignal
+import android.content.Context
 
 
 /**
@@ -67,7 +68,8 @@ class FirstFragment : Fragment(),iSendText,rvListSignal.OnItemClickListener,iSen
 
         mybluetooth.setinterfaceSendText(this)
         present.interfaceSendListInRv=this
-
+        present.attachDB()
+        present.presentLoad()
       /*  binding.rvMainCategory.layoutManager = mLayoutManager
         categorryAdapter.setData(dataCategoryMain.getCategory())
         binding.rvMainCategory.adapter=categorryAdapter*/
@@ -172,6 +174,10 @@ class FirstFragment : Fragment(),iSendText,rvListSignal.OnItemClickListener,iSen
         }
     }
 
+    override fun giveContext():Context{
+        val con = requireContext().applicationContext
+        return con
+    }
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
