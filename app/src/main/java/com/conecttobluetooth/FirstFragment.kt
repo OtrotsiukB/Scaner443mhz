@@ -185,7 +185,9 @@ class FirstFragment : Fragment(),iSendText,rvListSignal.OnItemClickListener,iSen
 
     override fun onItemClick(data: SignalData) {
         var bundle = bundleOf("Signal" to data)
-        findNavController().navigate(R.id.action_FirstFragment_to_SecondFragment,bundle)
+
+
+       findNavController().navigate(R.id.action_FirstFragment_to_SecondFragment,bundle)
     }
 
     override fun sendListinRv() {

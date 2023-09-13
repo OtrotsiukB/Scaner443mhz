@@ -10,6 +10,7 @@ object ConvertSignalDataToPersistensy {
         val name = signalData.name
         for (signal in signalData.signal){
             var temp = SignalDataPersistensySignal(null,name,signal)
+            tempSignalDataPersistensy.add(temp)
         }
         return tempSignalDataPersistensy
     }

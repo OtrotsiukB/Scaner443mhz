@@ -22,6 +22,9 @@ class PresenterFirstFragment {
     fun presentLoad(){
         CoroutineScope(Dispatchers.IO).launch {
             var listSignalDataFromDB = getListSignalFromLocalDB()
+            var s = listSignalDataFromDB
+            var ew = s
+            var sd = ew
             if (listSignalDataFromDB.size>1){
                 listSignalData=listSignalDataFromDB
                 //обновить список на фрагменте

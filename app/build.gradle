@@ -6,16 +6,20 @@ plugins {
 }
 
 android {
-    compileSdk 32
+    compileSdk 33
 
     defaultConfig {
         applicationId "com.conecttobluetooth"
         minSdk 26
-        targetSdk 32
+        targetSdk 33
         versionCode 1
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+        kapt {
+            arguments {arg("room.schemaLocation", "$projectDir/schemas")}
+        }
     }
 
     buildTypes {
@@ -45,18 +49,13 @@ dependencies {
     implementation 'androidx.navigation:navigation-fragment-ktx:2.4.2'
     implementation 'androidx.navigation:navigation-ui-ktx:2.4.2'
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.3.9'
-
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
 
-   // implementation "androidx.room:room-runtime:2.5.2"
-    //kapt  "androidx.room:room-compiler:2.5.0"
-   // implementation 'androidx.room:room-runtime:2.5.2'
-    //implementation 'androidx.room:room-compiler:2.5.2'
-    implementation 'androidx.room:room-runtime:2.2.6'
-    implementation 'androidx.room:room-compiler:2.2.6'
-    implementation 'androidx.room:room-ktx:2.2.6'
-    implementation 'androidx.room:room-testing:2.2.6'
-    implementation 'com.google.guava:listenablefuture:9999.0-empty-to-avoid-conflict-with-guava'
+    implementation 'androidx.room:room-runtime:2.5.0' // Библиотека "Room"
+    kapt "androidx.room:room-compiler:2.5.0" // Кодогенератор
+    implementation 'androidx.room:room-ktx:2.5.0' // Дополнительно для Kotlin Coroutines, Kotlin Flows
+
+
 }
